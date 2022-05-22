@@ -40,7 +40,7 @@ public class MainService {
     }
 
     public Route getRoute(String shortcutUrl) {
-        return routes.findByShortcutUrl(shortcutUrl)
+        return routes.findByShortcutUrlAndIncrementCounter(shortcutUrl)
                 .orElseThrow(() -> new NullPointerException("not found"));
     }
 

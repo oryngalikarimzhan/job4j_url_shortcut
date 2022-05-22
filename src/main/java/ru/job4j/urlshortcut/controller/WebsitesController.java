@@ -85,10 +85,10 @@ public class WebsitesController {
     @GetMapping("/redirect/{shortcutUrl}")
     public ResponseEntity<Void> redirect(@PathVariable String shortcutUrl) throws MalformedURLException {
         Route route = service.getRoute(shortcutUrl);
-        if (route != null) {
+      /*  if (route != null) {
             route.setRequestCounter(route.getRequestCounter() + 1);
             service.saveRoute(route);
-        }
+        }*/
         return ResponseEntity.status(HttpStatus.MOVED_TEMPORARILY)
                 .location(URI.create(route.getUrl()))
                 .build();
