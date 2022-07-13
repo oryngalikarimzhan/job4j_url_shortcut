@@ -25,13 +25,10 @@ import java.util.List;
 
 @RestController
 public class WebsitesController {
-    private final WebsiteRepository websites;
-
     private final MainService service;
     private final BCryptPasswordEncoder encoder;
 
     public WebsitesController(MainService service, WebsiteRepository websites, BCryptPasswordEncoder encoder) {
-        this.websites = websites;
         this.encoder = encoder;
         this.service = service;
     }
@@ -85,10 +82,6 @@ public class WebsitesController {
     @GetMapping("/redirect/{shortcutUrl}")
     public ResponseEntity<Void> redirect(@PathVariable String shortcutUrl) throws MalformedURLException {
         Route route = service.getRoute(shortcutUrl);
-      /*  if (route != null) {
-            route.setRequestCounter(route.getRequestCounter() + 1);
-            service.saveRoute(route);
-        }*/
         return ResponseEntity.status(HttpStatus.MOVED_TEMPORARILY)
                 .location(URI.create(route.getUrl()))
                 .build();
@@ -108,5 +101,4 @@ public class WebsitesController {
                 );
         return new ResponseEntity<>(statistic, HttpStatus.OK);
     }
-
 }
